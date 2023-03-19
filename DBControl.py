@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import os
 from pymongo import MongoClient
-from datetime import datetime
+from datetime import datetime,timezone,timedelta
 import json
 
 
@@ -25,7 +25,9 @@ def Check_DB_Onnection():
 def Insert_DB(data):
     mydb = DBclient[DB_name]
     mycol = mydb["patients"]
-    now = datetime.now()
+    dt1 = datetime.utcnow().replace(tzinfo=timezone.utc)
+    dt2 = dt1.astimezone(timezone(timedelta(hours=8)))
+    now = dt2.strftime("%Y-%m-%d %H:%M:%S")
     roc_date_str = data['birth']
     # 將民國年轉換為西元年
     year = int(roc_date_str[:2]) + 1911
@@ -40,8 +42,10 @@ def Insert_DB(data):
     data.pop('code')
     data.pop('cardDate')
     data["birth"]= ad_date
-    data["createdAT"] = now
+    data["createdAt"] = now
     data["updatedAt"] = now
+    data["phone"]=""
+    data["department"]=""
 
     try:
         # 查询数据库中是否已经存在该id

@@ -29,7 +29,8 @@ def readCard():
             "birth": ("".join(chr(i) for i in data[43:49])).encode("utf-8").decode("utf-8"),
             "gender": ("".join(chr(i) for i in data[49:50])).encode("utf-8").decode("utf-8"),
             "cardDate": ("".join(chr(i) for i in data[51:57])).encode("utf-8").decode("utf-8"),
-            "phone":"0912345678"
+            "phone":"0912345678",
+            "department":"cyLab"
         }
     except:
         return {

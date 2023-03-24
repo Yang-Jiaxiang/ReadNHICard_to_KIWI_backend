@@ -11,6 +11,7 @@ import requests
 from dotenv import load_dotenv
 import json
 from tkinter import messagebox
+import pickle
 
 load_dotenv()
 BACK_END_URL=os.getenv("BACK_END_URL")

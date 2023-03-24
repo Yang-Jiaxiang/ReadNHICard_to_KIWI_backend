@@ -2,16 +2,12 @@ import tkinter as tk
 from datetime import datetime
 import pprint
 import script.cardReader
-from PIL import Image
-from pystray import MenuItem as item
-import pystray
 import icon,os,base64
 from icon import img
 import requests
 from dotenv import load_dotenv
 import json
 from tkinter import messagebox
-import pickle
 
 load_dotenv()
 BACK_END_URL=os.getenv("BACK_END_URL")

@@ -1,5 +1,6 @@
 from smartcard.System import readers
 import json
+import datetime
 
 def readCard():
     try:
@@ -22,12 +23,16 @@ def readCard():
 
         name = str.strip(bytes(data[12:18]).decode("big5").rstrip('\x00'))
 
+        Year = ("".join(chr(i) for i in data[42:45])).encode("utf-8").decode("utf-8")
+        Month = ("".join(chr(i) for i in data[45:47])).encode("utf-8").decode("utf-8")
+        Day = ("".join(chr(i) for i in data[47:49])).encode("utf-8").decode("utf-8")
+        date_str = str(int(Year)+1911) + "-" + Month + "-" + Day
         return {
             "code":200,
             "id": ("".join(chr(i) for i in data[32:42])).encode("utf-8").decode("utf-8"),
             "name":name,
-            "birth": ("".join(chr(i) for i in data[43:49])).encode("utf-8").decode("utf-8"),
-            "gender": ("".join(chr(i) for i in data[49:50])).encode("utf-8").decode("utf-8"),
+            "birth": date_str,
+            "gender": ("".join(chr(i) for i in data[49:50])).encode("utf-8").decode("utf-8").lower(),
             "cardDate": ("".join(chr(i) for i in data[51:57])).encode("utf-8").decode("utf-8"),
             "phone":"0912345678",
             "department":"cyLab"

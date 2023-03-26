@@ -1,5 +1,8 @@
 # ReadNHICard2MongoDB_python
 
+## 說明
+使用python透過晶片讀卡機讀取健保卡卡面資料，登入使用kiwi系統backend auth api完成。將病患基本資料使用kiwi系統backend api 
+ 
 ## Build
 ``` pyinstaller -F -i logo.ico --add-data ".env;." --noconsole  main.py ```
 
